@@ -1,0 +1,63 @@
+
+@import "ember-bootstrap/bootstrap";
+
+.fontsize-25 {
+    font-size: 25pt;
+}
+
+.card-deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+  .card-body {
+    flex: 1 0 auto;
+  }
+  .hint-text {
+    margin: 10px 0;
+  }
+
+  .btn-primary {
+    background-color: #28a745;
+  }
+
+  .card-body-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10%;
+  }
+
+  .card-body-img {
+    height:200px;
+    width: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+  
+  .row-edit-img {
+    justify-content: space-around;
+  }
+
+  .row-image {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    padding-bottom: 20px;
+  }
+
+  .row-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10%;
+  }
+
+ 
