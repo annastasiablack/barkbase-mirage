@@ -2043,31 +2043,6 @@
 
   _exports.default = _default;
 });
-;define("barkbase/tests/mirage/mirage.lint-test", [], function () {
-  "use strict";
-
-  QUnit.module('ESLint | mirage');
-  QUnit.test('mirage/config.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'mirage/config.js should pass ESLint\n\n');
-  });
-  QUnit.test('mirage/factories/dog.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'mirage/factories/dog.js should pass ESLint\n\n');
-  });
-  QUnit.test('mirage/models/dog.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'mirage/models/dog.js should pass ESLint\n\n');
-  });
-  QUnit.test('mirage/scenarios/default.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'mirage/scenarios/default.js should pass ESLint\n\n');
-  });
-  QUnit.test('mirage/serializers/application.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'mirage/serializers/application.js should pass ESLint\n\n');
-  });
-});
 ;define("barkbase/utils/find-nested-relationship", ["exports", "ember-mirage-sauce/utils/find-nested-relationship"], function (_exports, _findNestedRelationship) {
   "use strict";
 
@@ -2104,7 +2079,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("barkbase/app")["default"].create({"name":"barkbase","version":"0.0.0+460e2407"});
+            require("barkbase/app")["default"].create({"name":"barkbase","version":"0.0.0+eb15a2ba"});
           }
         
 //# sourceMappingURL=barkbase.map
