@@ -12,7 +12,8 @@
 
   var _default = _emberData.default.JSONAPIAdapter.extend({
     namespace: 'api'
-  });
+  }); // when requests are made by the adapter, requests will go to /api/[route]
+
 
   _exports.default = _default;
 });
@@ -926,8 +927,7 @@
 
   var _default = Ember.Controller.extend({
     init() {
-      this._super(...arguments);
-
+      // this._super(...arguments);
       this.dog = this.store.createRecord('dog');
     },
 
@@ -972,7 +972,9 @@
 
   var _default = Ember.Controller.extend({
     searchQuery: '',
+    // dynamically filter list of dogs based on searchQuery, triggered upon change of model name or textbox 
     filteredDogs: Ember.computed('model.@each.name', 'searchQuery', function () {
+      // model paassed to controller by the route
       let dogs = this.get('model');
       let query = this.get('searchQuery').toLowerCase();
 
@@ -990,8 +992,10 @@
         let confirmed = confirm('Are you sure want to delete this record?');
 
         if (confirmed) {
+          // fetch dog record from ember data w/o back-end request
           let dog = this.store.peekRecord('dog', id);
-          dog.deleteRecord();
+          dog.deleteRecord(); // send request to server
+
           dog.save();
         }
       },
@@ -1010,9 +1014,9 @@
           page = page - 1;
           this.set('page', page);
         }
-      },
+      } // filterDogs() {
+      // }
 
-      filterDogs() {}
 
     }
   });
@@ -1572,7 +1576,8 @@
 
   var _default = _emberCliMirage.Factory.extend({
     imageURL(i) {
-      const urls = ['https://preview.redd.it/j2u52niuvb121.jpg?width=640&crop=smart&auto=webp&s=0f5beff3701e947b90d61727de95575bc2dff3ce', 'https://petlandbradenton.com/wp-content/uploads/2023/03/2110211_800-600x450.jpg', 'https://image.petmd.com/files/inline-images/german-shepherd-3.jpg?VersionId=QrldSoaj4srcfCInIahiKcoLSh5D0gh8'];
+      const urls = [// improve by using saved photos instead of urls
+      'https://preview.redd.it/j2u52niuvb121.jpg?width=640&crop=smart&auto=webp&s=0f5beff3701e947b90d61727de95575bc2dff3ce', 'https://petlandbradenton.com/wp-content/uploads/2023/03/2110211_800-600x450.jpg', 'https://www.bellaandduke.com/wp-content/uploads/2023/01/Border-collie-owners-dog-breed-guide-1.png'];
       return urls[i];
     },
 
@@ -1622,10 +1627,6 @@
   _exports.default = _default;
 
   function _default(server) {
-    /*
-      Seed your development database using your factories.
-      This data will not be loaded in your tests.
-    */
     server.createList('dog', 3);
   }
 });
@@ -1649,14 +1650,59 @@
   });
   _exports.default = void 0;
 
-  var _default = _emberData.default.Model.extend({
-    imageURL: _emberData.default.attr(),
-    name: _emberData.default.attr(),
-    breed: _emberData.default.attr(),
-    weight: _emberData.default.attr('number')
-  });
+  var _dec, _dec2, _dec3, _dec4, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
 
-  _exports.default = _default;
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  // import DS from 'ember-data';
+  var Model = _emberData.default.Model;
+  var attr = _emberData.default.attr; // updated to ES6 syntax & added explicit data types
+  // could improve by adding validations via library & adding logic to controller
+
+  let DogModel = (_dec = attr('string', {
+    defaultValue: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQySuVYbXn6Yg8UOIlTVjAiWRtQbJikNnRWj8Dz3gjFu6CMg_PR00kyJZOZltXV3AX9Xik&usqp=CAU'
+  }), _dec2 = attr('string'), _dec3 = attr('string'), _dec4 = attr('number'), (_class = (_temp = class DogModel extends Model {
+    constructor(...args) {
+      super(...args);
+
+      _initializerDefineProperty(this, "imageURL", _descriptor, this);
+
+      _initializerDefineProperty(this, "name", _descriptor2, this);
+
+      _initializerDefineProperty(this, "breed", _descriptor3, this);
+
+      _initializerDefineProperty(this, "weight", _descriptor4, this);
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "imageURL", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "name", [_dec2], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "breed", [_dec3], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "weight", [_dec4], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  })), _class));
+  _exports.default = DogModel;
+  ;
 });
 ;define("barkbase/modifiers/focus-trap", ["exports", "ember-focus-trap/modifiers/focus-trap"], function (_exports, _focusTrap) {
   "use strict";
@@ -1691,6 +1737,7 @@
     value: true
   });
   _exports.default = void 0;
+  // connects modules without needed manual imports 
   var _default = _emberResolver.default;
   _exports.default = _default;
 });
@@ -1761,16 +1808,27 @@
   });
   _exports.default = void 0;
 
-  var _default = Ember.Route.extend({
-    model({
+  // updated syntax
+  // could improve with try/catch error handling 
+  class DogRoute extends Ember.Route {
+    async model({
       id
     }) {
-      return this.store.peekRecord('dog', id);
+      try {
+        // check local storage first, then API request
+        return this.store.findRecord('dog', id); // peekRecord is local storage only
+        // fetch w/o network request can cause issues if the data is not preloaded or local store is outdated
+      } catch (error) {
+        // (ie. show a 404 page or error message)
+        console.error('Dog not found', error); // improve by handling error or transition to an error route
+        // this.transitionTo('error');
+      }
     }
 
-  });
+  }
 
-  _exports.default = _default;
+  _exports.default = DogRoute;
+  ;
 });
 ;define("barkbase/routes/dog/index", ["exports"], function (_exports) {
   "use strict";
@@ -1780,9 +1838,11 @@
   });
   _exports.default = void 0;
 
+  // improve with error handling 
   var _default = Ember.Route.extend({
     queryParams: {
       page: {
+        // route will reload model whenever param changed 
         refreshModel: true
       },
       size: {
@@ -1804,13 +1864,15 @@
       });
     },
 
+    // called after model is fetched & allows config of controller 
     setupController(controller, {
       dogs,
       meta
     }) {
-      this._super(controller, dogs);
+      this._super(controller, dogs); // pass list of dogs as the model for the controller
 
-      controller.set('meta', meta);
+
+      controller.set('meta', meta); // pagination info
     }
 
   });
@@ -1827,7 +1889,7 @@
 
   class IndexRoute extends Ember.Route {
     beforeModel() {
-      this.transitionTo('dog'); // Change 'dashboard' to your target route name
+      this.transitionTo('dog'); // auto route to dog dashboard
     }
 
   }
@@ -2016,8 +2078,8 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "+AzteC9A",
-    "block": "{\"symbols\":[\"dog\"],\"statements\":[[7,\"div\"],[11,\"class\",\"container\"],[9],[0,\"\\n\"],[0,\"  \"],[7,\"div\"],[11,\"class\",\"row mt-3\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"col-lg-6\"],[9],[0,\"\\n      \"],[7,\"h3\"],[11,\"class\",\"text-info\"],[9],[0,\"Voyant Barkbase\"],[10],[0,\"\\n    \"],[10],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"col-lg-6\"],[9],[0,\"\\n\"],[4,\"link-to\",[\"dog.create\"],[[\"class\"],[\"btn btn-info float-right\"]],{\"statements\":[[0,\"      \"],[7,\"i\"],[11,\"class\",\"fas fa-user\"],[9],[10],[0,\"  Add New Dog\\n\"]],\"parameters\":[]},null],[0,\"    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n  \"],[7,\"hr\"],[11,\"class\",\"bg-info\"],[9],[10],[0,\"\\n\\n\"],[0,\"  \"],[7,\"div\"],[11,\"class\",\"mb-4\"],[9],[0,\"\\n    \"],[1,[27,\"input\",null,[[\"type\",\"value\",\"placeholder\",\"class\",\"input\"],[\"text\",[22,0,[\"searchQuery\"]],\"Search dogs...\",\"form-control\",[27,\"action\",[[22,0,[]],\"filterDogs\"],null]]]],false],[0,\"\\n  \"],[10],[0,\"\\n\\n\"],[0,\"  \"],[7,\"div\"],[11,\"class\",\"row\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"col-lg-12\"],[9],[0,\"\\n      \"],[7,\"div\"],[11,\"class\",\"card-deck\"],[9],[0,\"\\n\"],[4,\"each\",[[22,0,[\"filteredDogs\"]]],null,{\"statements\":[[0,\"        \"],[7,\"div\"],[11,\"class\",\"card mb-4\"],[9],[0,\"\\n          \"],[7,\"div\"],[11,\"class\",\"card-body\"],[9],[0,\"\\n            \"],[7,\"div\"],[11,\"class\",\"card-body-img\"],[9],[0,\"\\n\"],[4,\"if\",[[22,1,[\"imageURL\"]]],null,{\"statements\":[[0,\"              \"],[7,\"img\"],[12,\"src\",[22,1,[\"imageURL\"]]],[12,\"alt\",[28,[\"picture of \",[22,1,[\"name\"]]]]],[9],[10],[0,\"\\n\"]],\"parameters\":[]},{\"statements\":[[0,\"              \"],[7,\"img\"],[11,\"src\",\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQySuVYbXn6Yg8UOIlTVjAiWRtQbJikNnRWj8Dz3gjFu6CMg_PR00kyJZOZltXV3AX9Xik&usqp=CAU\"],[12,\"alt\",[28,[\"picture of \",[22,1,[\"name\"]]]]],[9],[10],[0,\"\\n\"]],\"parameters\":[]}],[0,\"            \"],[10],[0,\"\\n            \"],[7,\"h5\"],[11,\"class\",\"card-title\"],[9],[4,\"link-to\",[\"dog.detail\",[22,1,[\"id\"]]],[[\"class\"],[\"text-success\"]],{\"statements\":[[1,[22,1,[\"name\"]],false]],\"parameters\":[]},null],[10],[0,\"\\n            \"],[7,\"p\"],[11,\"class\",\"card-text\"],[9],[0,\"Breed: \"],[1,[22,1,[\"breed\"]],false],[10],[0,\"\\n            \"],[7,\"p\"],[11,\"class\",\"card-text\"],[9],[0,\"Weight: \"],[1,[22,1,[\"weight\"]],false],[0,\" Lb\"],[10],[0,\"\\n          \"],[10],[0,\"\\n          \"],[7,\"div\"],[11,\"class\",\"card-footer bg-transparent\"],[9],[0,\"\\n            \"],[4,\"link-to\",[\"dog.edit\",[22,1,[\"id\"]]],[[\"class\"],[\"btn btn-sm btn-outline-success mr-2\"]],{\"statements\":[[1,[27,\"fa-icon\",[\"edit\"],null],false],[0,\"\\n            Edit\"]],\"parameters\":[]},null],[0,\"\\n            \"],[7,\"button\"],[11,\"class\",\"btn btn-sm btn-outline-danger\"],[9],[1,[27,\"fa-icon\",[\"trash-alt\"],null],false],[0,\"\\n              Delete\"],[3,\"action\",[[22,0,[]],\"deleteDog\",[22,1,[\"id\"]]]],[10],[0,\"\\n          \"],[10],[0,\"\\n        \"],[10],[0,\"\\n\"]],\"parameters\":[1]},null],[0,\"      \"],[10],[0,\"\\n      \"],[7,\"div\"],[11,\"class\",\"clearfix mt-4\"],[9],[0,\"\\n        \"],[7,\"button\"],[11,\"class\",\"btn btn-primary float-left\"],[9],[0,\"Prev\"],[3,\"action\",[[22,0,[]],\"movePrev\",[23,[\"meta\",\"page\"]]]],[10],[0,\"\\n        \"],[7,\"div\"],[11,\"class\",\"hint-text text-center\"],[9],[0,\"Page \"],[7,\"b\"],[9],[1,[23,[\"meta\",\"page\"]],false],[10],[0,\" out of \"],[7,\"b\"],[9],[1,[23,[\"meta\",\"pages\"]],false],[10],[10],[0,\"\\n        \"],[7,\"button\"],[11,\"class\",\"btn btn-primary float-right\"],[9],[0,\"Next\"],[3,\"action\",[[22,0,[]],\"moveNext\",[23,[\"meta\",\"page\"]]]],[10],[0,\"\\n      \"],[10],[0,\"\\n    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n\"],[10]],\"hasEval\":false}",
+    "id": "qJ7BBu+G",
+    "block": "{\"symbols\":[\"dog\"],\"statements\":[[7,\"div\"],[11,\"class\",\"container\"],[9],[0,\"\\n\"],[0,\"  \"],[7,\"div\"],[11,\"class\",\"row mt-3\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"col-lg-6\"],[9],[0,\"\\n      \"],[7,\"h3\"],[11,\"class\",\"text-info\"],[9],[0,\"Voyant Barkbase\"],[10],[0,\"\\n    \"],[10],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"col-lg-6\"],[9],[0,\"\\n\"],[4,\"link-to\",[\"dog.create\"],[[\"class\"],[\"btn btn-info float-right\"]],{\"statements\":[[0,\"      \"],[7,\"i\"],[11,\"class\",\"fas fa-user\"],[9],[10],[0,\"  Add New Dog\\n\"]],\"parameters\":[]},null],[0,\"    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n  \"],[7,\"hr\"],[11,\"class\",\"bg-info\"],[9],[10],[0,\"\\n\\n\"],[0,\"  \"],[7,\"div\"],[11,\"class\",\"mb-4\"],[9],[0,\"\\n    \"],[1,[27,\"input\",null,[[\"type\",\"value\",\"placeholder\",\"class\"],[\"text\",[22,0,[\"searchQuery\"]],\"Search dogs...\",\"form-control\"]]],false],[0,\"\\n  \"],[10],[0,\"\\n\\n\"],[0,\"  \"],[7,\"div\"],[11,\"class\",\"row\"],[9],[0,\"\\n    \"],[7,\"div\"],[11,\"class\",\"col-lg-12\"],[9],[0,\"\\n      \"],[7,\"div\"],[11,\"class\",\"card-deck\"],[9],[0,\"\\n\"],[4,\"each\",[[22,0,[\"filteredDogs\"]]],null,{\"statements\":[[0,\"        \"],[7,\"div\"],[11,\"class\",\"card mb-4\"],[9],[0,\"\\n          \"],[7,\"div\"],[11,\"class\",\"card-body\"],[9],[0,\"\\n            \"],[7,\"div\"],[11,\"class\",\"card-body-img\"],[9],[0,\"\\n              \"],[7,\"img\"],[12,\"src\",[22,1,[\"imageURL\"]]],[12,\"alt\",[28,[\"picture of \",[22,1,[\"name\"]]]]],[9],[10],[0,\"\\n            \"],[10],[0,\"\\n            \"],[7,\"h5\"],[11,\"class\",\"card-title\"],[9],[4,\"link-to\",[\"dog.detail\",[22,1,[\"id\"]]],[[\"class\"],[\"text-success\"]],{\"statements\":[[1,[22,1,[\"name\"]],false]],\"parameters\":[]},null],[10],[0,\"\\n            \"],[7,\"p\"],[11,\"class\",\"card-text\"],[9],[0,\"Breed: \"],[1,[22,1,[\"breed\"]],false],[10],[0,\"\\n            \"],[7,\"p\"],[11,\"class\",\"card-text\"],[9],[0,\"Weight: \"],[1,[22,1,[\"weight\"]],false],[0,\" Lb\"],[10],[0,\"\\n          \"],[10],[0,\"\\n          \"],[7,\"div\"],[11,\"class\",\"card-footer bg-transparent\"],[9],[0,\"\\n            \"],[4,\"link-to\",[\"dog.edit\",[22,1,[\"id\"]]],[[\"class\"],[\"btn btn-sm btn-outline-success mr-2\"]],{\"statements\":[[1,[27,\"fa-icon\",[\"edit\"],null],false],[0,\"\\n            Edit\"]],\"parameters\":[]},null],[0,\"\\n            \"],[7,\"button\"],[11,\"class\",\"btn btn-sm btn-outline-danger\"],[9],[1,[27,\"fa-icon\",[\"trash-alt\"],null],false],[0,\"\\n              Delete\"],[3,\"action\",[[22,0,[]],\"deleteDog\",[22,1,[\"id\"]]]],[10],[0,\"\\n          \"],[10],[0,\"\\n        \"],[10],[0,\"\\n\"]],\"parameters\":[1]},null],[0,\"      \"],[10],[0,\"\\n      \"],[7,\"div\"],[11,\"class\",\"clearfix mt-4\"],[9],[0,\"\\n        \"],[7,\"button\"],[11,\"class\",\"btn btn-primary float-left\"],[9],[0,\"Prev\"],[3,\"action\",[[22,0,[]],\"movePrev\",[23,[\"meta\",\"page\"]]]],[10],[0,\"\\n        \"],[7,\"div\"],[11,\"class\",\"hint-text text-center\"],[9],[0,\"Page \"],[7,\"b\"],[9],[1,[23,[\"meta\",\"page\"]],false],[10],[0,\" out of \"],[7,\"b\"],[9],[1,[23,[\"meta\",\"pages\"]],false],[10],[10],[0,\"\\n        \"],[7,\"button\"],[11,\"class\",\"btn btn-primary float-right\"],[9],[0,\"Next\"],[3,\"action\",[[22,0,[]],\"moveNext\",[23,[\"meta\",\"page\"]]]],[10],[0,\"\\n      \"],[10],[0,\"\\n    \"],[10],[0,\"\\n  \"],[10],[0,\"\\n\"],[10]],\"hasEval\":false}",
     "meta": {
       "moduleName": "barkbase/templates/dog/index.hbs"
     }
@@ -2079,7 +2141,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("barkbase/app")["default"].create({"name":"barkbase","version":"0.0.0+eb15a2ba"});
+            require("barkbase/app")["default"].create({"name":"barkbase","version":"0.0.0+36d0c96a"});
           }
         
 //# sourceMappingURL=barkbase.map

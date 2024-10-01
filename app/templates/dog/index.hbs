@@ -19,7 +19,6 @@
     value=this.searchQuery
     placeholder="Search dogs..."
     class="form-control"
-    input=(action "filterDogs")
     }}
   </div>
 
@@ -31,13 +30,7 @@
         <div class="card mb-4">
           <div class="card-body">
             <div class="card-body-img">
-              {{#if dog.imageURL}}
               <img src={{dog.imageURL}} alt="picture of {{dog.name}}" />
-              {{else}}
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQySuVYbXn6Yg8UOIlTVjAiWRtQbJikNnRWj8Dz3gjFu6CMg_PR00kyJZOZltXV3AX9Xik&usqp=CAU"
-                alt="picture of {{dog.name}}" />
-              {{/if}}
             </div>
             <h5 class="card-title">{{#link-to "dog.detail" dog.id class="text-success"}}{{dog.name}}{{/link-to}}</h5>
             <p class="card-text">Breed: {{dog.breed}}</p>
