@@ -2141,7 +2141,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("barkbase/app")["default"].create({"name":"barkbase","version":"0.0.0+4b1ec283"});
+            require("barkbase/app")["default"].create({"name":"barkbase","version":"0.0.0+7480b48c"});
           }
         
 //# sourceMappingURL=barkbase.map
